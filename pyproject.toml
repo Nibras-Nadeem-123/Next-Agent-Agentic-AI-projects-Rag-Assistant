@@ -1,0 +1,14 @@
+[project]
+name = "next-agent-agentic-ai-projects-rag-assistant"
+version = "0.1.0"
+description = "RAG Assistant with document upload, vector store, and contextual answering"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai-agents>=0.17.4",
+    "python-dotenv>=1.2.2",
+    "streamlit>=1.58.0",
+    "chromadb>=0.4.0",
+    "pypdf2>=3.0.0",
+    "google-generativeai>=0.5.0",
+]

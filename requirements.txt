@@ -1,0 +1,6 @@
+openai-agents
+python-dotenv
+streamlit
+chromadb
+pypdf2
+google-generativeai
