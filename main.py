@@ -25,10 +25,16 @@ def get_retriever() -> RAGRetriever:
     """Get or create the RAG retriever instance."""
     if "retriever" not in st.session_state:
         api_key = os.getenv("GEMINI_API_KEY")
+
         if not api_key:
             st.error("GEMINI_API_KEY not found in environment variables!")
             st.stop()
-        st.session_state.retriever = RAGRetriever(api_key=api_key)
+
+        # Use local embeddings (sentence-transformers) for reliability
+        st.session_state.retriever = RAGRetriever(
+            api_key=api_key,
+            use_local_embeddings=True
+        )
     return st.session_state.retriever
 
 

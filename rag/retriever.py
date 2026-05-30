@@ -13,6 +13,9 @@ class RAGRetriever:
     def __init__(
         self,
         api_key: str,
+        base_url: Optional[str] = None,
+        embedding_model: str = "text-embedding-004",
+        use_local_embeddings: bool = False,
         persist_directory: str = "./chroma_db",
         chunk_size: int = 500,
         chunk_overlap: int = 50
@@ -20,12 +23,20 @@ class RAGRetriever:
         """Initialize the RAG retriever.
 
         Args:
-            api_key: Gemini API key for embeddings.
+            api_key: API key for embeddings.
+            base_url: Optional base URL for OpenAI-compatible endpoint.
+            embedding_model: Embedding model to use.
+            use_local_embeddings: If True, use local sentence-transformers.
             persist_directory: Directory to persist the vector store.
             chunk_size: Size of text chunks.
             chunk_overlap: Overlap between chunks.
         """
-        self.embeddings = GeminiEmbeddings(api_key=api_key)
+        self.embeddings = GeminiEmbeddings(
+            api_key=api_key,
+            base_url=base_url,
+            model=embedding_model,
+            use_local=use_local_embeddings
+        )
         self.vector_store = VectorStore(persist_directory=persist_directory)
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
